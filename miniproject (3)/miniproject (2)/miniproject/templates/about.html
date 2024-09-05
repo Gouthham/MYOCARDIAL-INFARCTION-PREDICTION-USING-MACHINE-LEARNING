@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ordered List Example</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #333;
+            /* Dark gray background */
+            color: #f0f0f0;
+            /* Light gray text color for better contrast */
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Ordered List Styling */
+        ol {
+            max-width: 1200px;
+            /* Maximum width of list */
+            width: 100%;
+            padding: 0;
+            list-style: none;
+            /* Remove default list styling */
+        }
+
+        li {
+            background-color: #fff;
+            /* White background color for list items */
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* Box shadow for list items */
+            margin-bottom: 15px;
+            padding: 15px;
+            font-size: 1em;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        /* Heading Styling */
+        li h1 {
+            font-size: 1.5em;
+            color: #131415;
+            margin-bottom: 10px;
+            background-color: #ffffff;
+            /* White background for headings */
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            li {
+                font-size: 0.9em;
+                /* Slightly smaller font on smaller screens */
+            }
+        }
+
+        @media (max-width: 480px) {
+            li {
+                font-size: 0.8em;
+                /* Even smaller font on very small screens */
+            }
+        }
+
+        /* Form Button Styling */
+        .form-button {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .form-button a {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            display: inline-block;
+        }
+
+        .form-button a:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <ol>
+        <li>
+            <h1>AGE</h1>
+            <p>Age is a significant risk factor for cardiovascular diseases. The likelihood of developing heart disease increases with age.</p>
+        </li>
+        <li>
+            <h1>Sex</h1>
+            <p>There are differences in heart disease prevalence and symptoms between males and females.</p>
+        </li>
+        <li>
+            <h1>Chest Pain</h1>
+            <p>Refers to discomfort or pain in the chest, often a symptom of heart disease, including angina, myocardial infarction, or other cardiac conditions.</p>
+        </li>
+        <li>
+            <h1>Resting Blood Pressure</h1>
+            <p>The pressure exerted by circulating blood on the walls of blood vessels when the heart is at rest, measured in mm Hg.</p>
+        </li>
+        <li>
+            <h1>Serum Cholesterol</h1>
+            <p>Serum cholesterol measures the total cholesterol level in the blood, including LDL (bad) and HDL (good) cholesterol. High levels can increase the risk of heart disease and stroke.</p>
+        </li>
+        <li>
+            <h1>Fasting Blood Sugar</h1>
+            <p>The blood glucose level measured after fasting for at least 8 hours. Elevated levels can indicate diabetes, a significant risk factor for cardiovascular diseases and other health issues.</p>
+        </li>
+        <li>
+            <h1>Resting Electrocardiographic Results</h1>
+            <p>The findings from an ECG taken while at rest, assessing heart rhythm and electrical activity. Abnormal results can indicate conditions like ischemia, arrhythmias, or left ventricular hypertrophy.</p>
+        </li>
+        <li>
+            <h1>Maximum Heart Rate Achieved</h1>
+            <p>The highest heart rate recorded during a stress test, indicating cardiovascular fitness. It helps evaluate the heart's response to physical exertion and detect potential heart conditions.</p>
+        </li>
+        <li>
+            <h1>Exercise-Induced Angina</h1>
+            <p>Exercise-induced angina is chest pain or discomfort that occurs during physical activity or exercise. It happens because the heart muscle isn't getting enough oxygen-rich blood to meet the increased demands during exertion. This can be a sign of underlying coronary artery disease or other heart conditions.</p>
+        </li>
+        <li class="form-button">
+            <a href="/form">Know Your Health Status</a>
+        </li>
+    </ol>
+</body>
+
+</html>

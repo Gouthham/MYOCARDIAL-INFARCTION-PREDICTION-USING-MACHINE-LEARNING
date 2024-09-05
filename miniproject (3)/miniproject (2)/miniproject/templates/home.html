@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Navigation Bar</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        /* Customize link hover color */
+        .navbar-nav .nav-link {
+            transition: color 0.3s ease, background-color 0.3s ease; /* Smooth transition for hover effects */
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #000; /* Change text color to black on hover */
+            background-color: #fff; /* Full white background color on hover */
+            border-radius: 4px; /* Optional: Rounded corners for hover background */
+        }
+
+        /* Optional: Style the navbar brand */
+        .navbar-brand {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Optional: Center main section text */
+        main section {
+            margin-top: 50px;
+        }
+
+        /* Centering image */
+        .img-center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%; /* Adjust image width as needed */
+            border-radius: 10px; /* Optional: rounded corners */
+            filter: grayscale(100%); /* Apply grayscale filter to make image black and white */
+            transition: filter 0.3s ease; /* Optional: Smooth transition for filter change */
+        }
+
+        .img-center:hover {
+            filter: grayscale(0%); /* Optional: Remove grayscale on hover to show the original image */
+        }
+
+        /* Container styling */
+        .custom-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            padding: 0 20px; /* Padding to ensure space on the edges */
+        }
+
+        /* Box styling */
+        .content-box {
+            display: flex;
+            background: rgba(255, 255, 255, 0.3); /* White background with 30% opacity */
+            backdrop-filter: blur(10px); /* Apply blur effect */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: box shadow for better visual */
+            width: 100%;
+            max-width: 2000px; /* Increase max-width */
+        }
+
+        /* Right side content styling */
+        .right-content {
+            padding: 20px;
+            width: 50%;
+        }
+
+        /* Image section styling */
+        .image-section {
+            width: 50%;
+        }
+
+        /* Plain Button Styling */
+        .btn-plain {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: transparent;
+            border: 2px solid #000; /* Black border */
+            color: #000; /* Black text */
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer; /* Pointer cursor on hover */
+        }
+
+        .btn-plain:hover {
+            background-color: #000;
+            color: #fff;
+        }
+
+        /* About Us Section styling */
+        .about-us-container {
+            background-color: #000; /* Black background for About Us section */
+            color: #fff; /* White text color for better contrast */
+            padding: 40px 20px;
+            margin-top: 40px;
+            border-radius: 10px; /* Add rounded corners */
+        }
+
+        .about-us-content {
+            max-width: 1200px; /* Set maximum width */
+            margin: 0 auto; /* Center the content */
+        }
+
+        .about-us-content h1 {
+            margin-bottom: 20px;
+        }
+
+        .about-us-content p {
+            line-height: 1.6;
+        }
+
+        /* Social Media Icons styling */
+        .social-icons {
+            margin-top: 20px;
+        }
+
+        .social-icon {
+            color: #fff; /* White color for icons */
+            font-size: 24px; /* Size of the icons */
+            margin-right: 15px; /* Space between icons */
+            transition: color 0.3s ease; /* Smooth transition for hover effect */
+        }
+
+        .social-icon:hover {
+            color: #ccc; /* Lighter gray color on hover */
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">CardioGuard</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/aboutus">ABOUT US</a> <!-- Link to About Us section -->
+                    </li>
+                    <li class="nav-item mx-4"> <!-- Add spacing between items -->
+                        <a class="nav-link" href="#">SIGN UP</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container-fluid mt-4">
+        <!-- Custom Container Section -->
+        <section class="custom-container">
+            <div class="content-box">
+                <div class="image-section">
+                    <img src="{{ url_for('static', filename='img.jpg') }}" alt="img" class="img-center">
+                </div>
+                <div class="right-content">
+                    <!-- Information about the Dataset -->
+                    <h3>Myocardial infarction</h3>
+                    <p>
+                        Myocardial infarction (MI), colloquially known as "heart attack," is caused by decreased or complete cessation of blood flow to a portion of the myocardium. Most myocardial infarctions are due to underlying coronary artery disease.
+                        <br><br>
+                        Key reasons of how Myocardial infarction happens:
+                        <ul>
+                            <li><strong>Age:</strong> Ranging from children to seniors.</li>
+                            <li><strong>Gender:</strong> Male and Female participants.</li>
+                            <li><strong>Cholesterol Levels:</strong> Detailed lipid profile data.</li>
+                            <li><strong>Blood Pressure:</strong> Systolic and diastolic readings.</li>
+                            <li><strong>Medical History:</strong> Previous heart conditions and treatments.</li>
+                        </ul>
+                    
+                    </p>
+                    <!-- Plain Button -->
+                    <a href="/about"><button class="btn-plain">Click Here to Know More</button></a>
+                    <br><br>
+                    <h3> Click the button below to fill out the form and know your health status.</h3>
+                    <a href="/form"><button class="btn-plain">Know Your Health Status</button></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about-us" class="about-us-container"> <!-- Added ID here -->
+            <div class="about-us-content">
+                <h1>About</h1>
+                <p>
+                    Welcome to our website. We are committed to providing you with the best service possible. Our team is dedicated to ensuring you have the best experience with us.
+                    <br><br>
+                    Our mission is to deliver high-quality solutions that meet your needs and exceed your expectations. We pride ourselves on our customer service and look forward to working with you.
+                    <br><br>
+                    Feel free to reach out to us if you have any questions or need assistance.
+                </p>
+
+                <!-- Social Media Icons -->
+                <div class="social-icons">
+                    <a href="https://www.facebook.com" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="https://twitter.com" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="mailto:example@gmail.com" class="social-icon"><i class="fas fa-envelope"></i></a>
+                    <a href="https://www.linkedin.com" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

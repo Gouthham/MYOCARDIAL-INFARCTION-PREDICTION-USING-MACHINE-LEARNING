@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            box-sizing: border-box;
+            background-image: url('{{ url_for('static', filename='h.png' ) }}');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            padding: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        input[type=text],
+        select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .cancelbtn {
+            width: auto;
+            padding: 10px 18px;
+            background-color: #f44336;
+        }
+
+        .prediction-result {
+            margin-top: 20px;
+            text-align: center;
+            color: #333;
+            font-size: 1.2em;
+        }
+
+        table {
+            width: auto;
+            max-width: 100%;
+            border-collapse: collapse;
+            margin: 20px auto;
+            /* Center the table */
+            font-size: 0.9em;
+            /* Adjust font size for smaller table */
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            /* Reduced padding for smaller table */
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 0.9em;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            let formIsValid = true;
+
+            // Validate Name
+            const nameInput = document.getElementById('name');
+            const nameValue = nameInput.value;
+            const nameErrorElement = document.getElementById('name-error');
+
+            if (!/^[a-zA-Z\s]+$/.test(nameValue)) {
+                nameErrorElement.textContent = "Name must contain only alphabetic characters.";
+                formIsValid = false;
+            } else {
+                nameErrorElement.textContent = "";
+            }
+
+            // Validate Numeric Fields
+            const fieldsToValidate = [
+                { id: 'age', label: 'Age' },
+                { id: 'trestbps', label: 'Resting Blood Pressure' },
+                { id: 'chol', label: 'Serum Cholestoral' },
+                { id: 'thalach', label: 'Max. Heart Rate Achieved' },
+                { id: 'oldpeak', label: 'ST Depression Induced by Exercise' },
+                { id: 'ca', label: 'Number of Major Vessels Colored by Flourosopy' }
+            ];
+
+            fieldsToValidate.forEach(field => {
+                const inputElement = document.getElementById(field.id);
+                const inputValue = parseFloat(inputElement.value);
+                const errorMessageElement = document.getElementById(`${field.id}-error`);
+
+                if (isNaN(inputValue) || inputValue < 0) {
+                    errorMessageElement.textContent = `${field.label} must be a positive number.`;
+                    formIsValid = false;
+                } else {
+                    errorMessageElement.textContent = "";
+                }
+            });
+
+            return formIsValid;
+        }
+    </script>
+</head>
+
+<body>
+    {% if not prediction %}
+    <div class="container">
+        <h2>Report Form</h2>
+        <form name="passdata" action="/" method="post" onsubmit="return validateForm()">
+            <label for="name">Name</label>
+            <input name="name" type="text" id="name" placeholder="Enter Your Name.." required>
+            <div id="name-error" class="error-message"></div>
+
+            <label for="age">Age</label>
+            <input name="age" type="text" id="age" placeholder="Enter Your Age.." required>
+            <div id="age-error" class="error-message"></div>
+
+            <label for="sex">Gender</label>
+            <select name="sex" id="sex" required>
+                <option value="" disabled selected>Select Your Gender ..</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+
+            <label for="cp">Chest Pain Types</label>
+            <select name="cp" id="cp" required>
+                <option value="" disabled selected>Select Type Of Chest Pain ..</option>
+                <option value="Typical Angina">Typical Angina</option>
+                <option value="Atypical Angina">Atypical Angina</option>
+                <option value="Non-anginal Pain">Non-anginal Pain</option>
+                <option value="Asymptomatic">Asymptomatic</option>
+            </select>
+
+            <label for="trestbps">Resting Blood Pressure</label>
+            <input name="trestbps" type="text" id="trestbps" placeholder="Blood Pressure Value (mmHg).." required>
+            <div id="trestbps-error" class="error-message"></div>
+
+            <label for="chol">Serum Cholestoral</label>
+            <input name="chol" type="text" id="chol" placeholder="Cholestoral Value (mg/dl).." required>
+            <div id="chol-error" class="error-message"></div>
+
+            <label for="fbs">Fasting Blood Sugar</label>
+            <select name="fbs" id="fbs" required>
+                <option value="" disabled selected>Fasting Blood Sugar > 120mg/dl</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+
+            <label for="restecg">Resting ECG</label>
+            <select name="restecg" id="restecg" required>
+                <option value="" disabled selected>Resting ECG</option>
+                <option value="Normal">Normal</option>
+                <option value="Having ST-T Wave Abnormality">Having ST-T Wave Abnormality</option>
+                <option value="Left Ventricular Hyperthrophy">Left Ventricular Hyperthrophy</option>
+            </select>
+
+            <label for="thalach">Max. Heart Rate Achieved</label>
+            <input name="thalach" type="text" id="thalach" placeholder="Max. Heart Rate .." required>
+            <div id="thalach-error" class="error-message"></div>
+
+            <label for="exang">Exercise Induced Angina</label>
+            <select name="exang" id="exang" required>
+                <option value="" disabled selected>Exercise Induced Angina</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+
+            <label for="oldpeak">ST Depression Induced by Exercise</label>
+            <input name="oldpeak" type="text" id="oldpeak" placeholder="Enter Value.." required>
+            <div id="oldpeak-error" class="error-message"></div>
+
+            <label for="slope">Peak Exercise ST Segment</label>
+            <select name="slope" id="slope" required>
+                <option value="" disabled selected>Peak exercise ST Segment</option>
+                <option value="Upsloping">Upsloping</option>
+                <option value="Flat">Flat</option>
+                <option value="Downsloping">Downsloping</option>
+            </select>
+
+            <label for="ca">Number of Major Vessels Colored by Flourosopy</label>
+            <input name="ca" type="text" id="ca" placeholder="Enter value .." required>
+            <div id="ca-error" class="error-message"></div>
+
+            <label for="thal">Thalassemia</label>
+            <select name="thal" id="thal" required>
+                <option value="" disabled selected>Thal</option>
+                <option value="Normal">Normal</option>
+                <option value="Fixed Defect">Fixed Defect</option>
+                <option value="Reversible Defect">Reversible Defect</option>
+            </select>
+
+            <button type="submit">Submit Report</button>
+        </form>
+    </div>
+    {% endif %}
+
+    {% if prediction %}
+    <div class="prediction-result">
+        <h2>Prediction Result</h2>
+        <p>{{ name }}, {{ prediction }}</p>
+
+        <!-- Display the user details in a table -->
+        <h3>Your Submitted Details:</h3>
+        <table>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>{{ name }}</td>
+            </tr>
+            <tr>
+                <td>Age</td>
+                <td>{{ age }}</td>
+            </tr>
+            <tr>
+                <td>Gender</td>
+                <td>{{ sex }}</td>
+            </tr>
+            <tr>
+                <td>Chest Pain Types</td>
+                <td>{{ cp }}</td>
+            </tr>
+            <tr>
+                <td>Resting Blood Pressure</td>
+                <td>{{ trestbps }}</td>
+            </tr>
+            <tr>
+                <td>Serum Cholestoral</td>
+                <td>{{ chol }}</td>
+            </tr>
+            <tr>
+                <td>Fasting Blood Sugar</td>
+                <td>{{ fbs }}</td>
+            </tr>
+            <tr>
+                <td>Resting ECG</td>
+                <td>{{ restecg }}</td>
+            </tr>
+            <tr>
+                <td>Max. Heart Rate Achieved</td>
+                <td>{{ thalach }}</td>
+            </tr>
+            <tr>
+                <td>Exercise Induced Angina</td>
+                <td>{{ exang }}</td>
+            </tr>
+            <tr>
+                <td>ST Depression Induced by Exercise</td>
+                <td>{{ oldpeak }}</td>
+            </tr>
+            <tr>
+                <td>Peak Exercise ST Segment</td>
+                <td>{{ slope }}</td>
+            </tr>
+            <tr>
+                <td>Number of Major Vessels Colored by Flourosopy</td>
+                <td>{{ ca }}</td>
+            </tr>
+            <tr>
+                <td>Thalassemia</td>
+                <td>{{ thal }}</td>
+            </tr>
+        </table>
+    </div>
+    {% endif %}
+</body>
+
+</html>
